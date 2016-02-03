@@ -1,25 +1,24 @@
-function initCharts(ec) {
-    initDailyVisits(ec);
-    initURLsPercent(ec);
+function initCharts() {
+    initDailyVisits();
+    initURLsPercent();
 }
-function initDailyVisits(ec) {
-    var ecConfig = require('echarts/config');
+function initDailyVisits() {
     //--- 折柱 ---
-    var dailyVisitsChart = ec.init(document.getElementById('dailyVisits'));
+    var dailyVisitsChart = echarts.init(document.getElementById('dailyVisits'));
     dailyVisitsChart.setOption({
         title : {
             text : '2015 年 Chrome 历史浏览量',
             subtext : '^_^'
         },
         tooltip : {
-            trigger: 'item',
+            trigger: 'axis',
             formatter : function (params) {
-                var date = new Date(params.value[0]);
+                var date = new Date(params[0].value[0]);
                 data = date.getFullYear() + '-'
                        + (date.getMonth() + 1) + '-'
                        + date.getDate();
                 return data + '<br/>'
-                       + "访问量：" + params.value[1];
+                       + "访问量：" + params[0].value[1];
             }
         },
         toolbox: {
@@ -56,9 +55,6 @@ function initDailyVisits(ec) {
             {
                 type: 'line',
                 showAllSymbol: true,
-                symbolSize: function (value){
-                    return Math.round(value[1]/100) + 2;
-                },
                 data: (function () {
                     return _.map(dailyVisits, function(visit) {
                         return [new Date(visit[0]), visit[1]];
@@ -67,13 +63,13 @@ function initDailyVisits(ec) {
             }
         ]
     });
-    dailyVisitsChart.on(ecConfig.EVENT.CLICK, function(param) {
+    dailyVisitsChart.on('click', function(param) {
         window.open("/chrome/details/" + param.data[0].getTime())
     });
 
 }
-function initURLsPercent(ec) {
-    var URLsPercentChart = ec.init(document.getElementById('URLsPercent'));
+function initURLsPercent() {
+    var URLsPercentChart = echarts.init(document.getElementById('URLsPercent'));
     var limit = urlsFreq.length < 20 ? urlsFreq.length : 10;
     var top20Urls = [];
     var top20Titles = [];
@@ -103,7 +99,7 @@ function initURLsPercent(ec) {
                 mark : {show: true},
                 dataView : {show: true, readOnly: false},
                 magicType : {
-                    show: true, 
+                    show: true,
                     type: ['pie', 'funnel'],
                     option: {
                         funnel: {

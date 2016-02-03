@@ -1,12 +1,12 @@
 {
     "port": 5210,
-    "chrome_history_file": "/Users/liujiacai/Desktop/History",
+    "chrome_history_file": "/Users/lang/Desktop/History",
     "export_file" : {
-        "countDailyVisits": "/Users/liujiacai/Desktop/countDailyVisits.csv",
-        "countURLsFrequence": "/Users/liujiacai/Desktop/countURLsFrequence.csv"
+        "countDailyVisits": "/Users/lang/Desktop/countDailyVisits.csv",
+        "countURLsFrequence": "/Users/lang/Desktop/countURLsFrequence.csv"
     },
     "count_range": {
-        "start": "2015/01/01",
+        "start": "2014/01/01",
         "end": "2016/01/01"
     }
 }
